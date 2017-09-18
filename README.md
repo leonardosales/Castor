@@ -37,8 +37,7 @@ Examples of usage:
                 "objeto_com_nome?" => $casObj->isNamedObject(),
                 "objeto_sem_nome?" => $casObj->isUnnamedObject(),
                 "metadados" => $casObj->getMetadata("TCE", 'NomeArquivo'),
-                "ciclo_vida" => $casObj->getLifecycles(),
-                "tempo" => ($fTempo - $iTempo)
+                "ciclo_vida" => $casObj->getLifecycles()
             ];
         } catch (\Castor\Exception $e) {
             return $e->getCode() . " - " . $e->getMessage();
