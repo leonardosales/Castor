@@ -43,3 +43,33 @@ Examples of usage:
             return $e->getCode() . " - " . $e->getMessage();
         }
     }
+
+To retrieve a content stored in CAStor use Castor\Object
+
+    public function get($uuid = FALSE)
+    {
+        try {
+            $metadados = [];
+            $casObj = new \Castor\Object($uuid);
+            return [
+                "uuid" => $casObj->getUUID(),
+                "nome" => $casObj->getName(),
+                "conteudo" => $casObj->getContent(),
+                "tamanho_conteudo" => strlen($casObj->getContent()),
+                "mime_type" => $casObj->getContentType(),
+                "num_replicas" => $casObj->getCountReplicas(),
+                "data_criacao" => $casObj->getDate(),
+                "data_requisicao" => $casObj->getRequestDate(),
+                "eh_mutavel?" => $casObj->isMutable(),
+                "eh_imutavel?" => $casObj->isImmutable(),
+                "objeto_com_nome?" => $casObj->isNamedObject(),
+                "objeto_sem_nome?" => $casObj->isUnnamedObject(),
+                "metadados" => $casObj->getMetadatas(),
+                "ciclo_vida" => $casObj->getLifecycles(),
+            ];
+        } catch (\HttpException $e) {
+            return $e->getMessage();
+        } catch (\Castor\Exception $e) {
+            return $e->getCode() . " - " . $e->getMessage();
+        }
+    }
